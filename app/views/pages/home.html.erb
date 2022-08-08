@@ -3,11 +3,12 @@
 
 <% if current_user %>
 
-    <P> Hello <% current_user.email %> </p>
+    <P> Hello <%= current_user.email %> </p>
+    <P> Hello <%= current_user.username %> </p>
 
     <p>
-        You are login and authenticated
-        You are are <% current_user.admin? %> admin
+        You are login and authenticated <br/>
+        You are <%= current_user.admin? ? "an" : "not" %> admin
         <p>
             <%= link_to "Sign-out", destroy_user_session_path, 'data-turbo-method': :delete %>
         </p>
