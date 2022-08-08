@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable
+  devise :database_authenticatable, :jwt_authenticatable, :registerable,
+         :recoverable, :rememberable, jwt_revocation_strategy: JwtDenylist
 
   validates :email, presence: true
   validates :password, presence: true, confirmation: true
