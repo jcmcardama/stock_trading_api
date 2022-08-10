@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :jwt_authenticatable, :registerable,
-         :recoverable, :rememberable, jwt_revocation_strategy: JwtDenylist
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable
+
+  alias_method :authenticate, :valid_password?
 
   validates :email, presence: true
   validates :password, presence: true, confirmation: true
@@ -8,6 +10,10 @@ class User < ApplicationRecord
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   attr_writer :login
+
+  def self.from_token_payload(payload)
+    self.find payload["sub"]
+  end
 
   def login
     @login || self.username || self.email

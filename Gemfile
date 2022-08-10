@@ -13,7 +13,7 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem 'devise'
-gem 'devise-jwt'
+gem 'knock'
 gem 'rack-cors'
 
 group :development, :test do
